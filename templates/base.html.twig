@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site d'exercices</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            {% include 'sidebar.html.twig' %}
+        </div>
+        <div class="main-content">
+            {% block body %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>
