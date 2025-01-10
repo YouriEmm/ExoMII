@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ResultatRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Utilisateur;
 
 #[ORM\Entity(repositoryClass: ResultatRepository::class)]
 class Resultat
@@ -16,8 +17,14 @@ class Resultat
     #[ORM\Column]
     private ?int $score = null;
 
+    #[ORM\Column]
+    private ?int $totalQuestions = null;
+
     #[ORM\ManyToOne(inversedBy: 'resultats')]
     private ?Exercice $exercice = null;
+
+    #[ORM\ManyToOne]
+    private ?Utilisateur $user = null;
 
     public function getId(): ?int
     {
@@ -36,6 +43,18 @@ class Resultat
         return $this;
     }
 
+    public function getTotalQuestions(): ?int
+    {
+        return $this->totalQuestions;
+    }
+
+    public function setTotalQuestions(int $totalQuestions): static
+    {
+        $this->totalQuestions = $totalQuestions;
+
+        return $this;
+    }
+
     public function getExercice(): ?Exercice
     {
         return $this->exercice;
@@ -47,4 +66,17 @@ class Resultat
 
         return $this;
     }
+
+    public function getUser(): ?Utilisateur
+    {
+        return $this->user;
+    }
+
+    public function setUser(?Utilisateur $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
+

@@ -1,20 +1,33 @@
-<div class="sidebar-content">
-    {% if app.user %}
-        <p>Bienvenue, {{ app.user.nom }}</p>
-    {% else %}
-        <p>Veuillez vous connecter</p>
-        <a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter</a>
-    {% endif %}
-    
-    <ul>
-        {% for matiere in matieres %}
-            <li>{{ matiere.nom }}</li>
-        {% else %}
-            <li>Aucune matière disponible.</li>
-        {% endfor %}
-    </ul>
+<div class="sidebar">
+    <div class="sidebar-header">
         {% if app.user %}
-        <form action="{{ path('app_logout') }}" method="post" class="logout-form">
+            <p>Bienvenue, {{ app.user.nom }}</p>
+            <a  class="btn {% if 'ROLE_ADMIN' in app.user.roles %}btn-warning{% else %}btn-primary{% endif %}">
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    Admin
+                {% else %}
+                    Profil
+                {% endif %}
+            </a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter</a>
+        {% endif %}
+    </div>
+
+    <div class="sidebar-content">
+        <ul>
+            {% for matiere in get_matieres() %}
+                <li>
+                    <a href="{{ path('matiere_show', { id: matiere.id }) }}">
+                        {{ matiere.nom }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if app.user %}
+        <form method="POST" action="{{ path('app_logout') }}">
             <button type="submit" class="btn btn-danger">Déconnexion</button>
         </form>
     {% endif %}

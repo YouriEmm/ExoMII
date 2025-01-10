@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ exercice.titre }} - Questions{% endblock %}
+
+{% block body %}
+    <div class="questions-container">
+        <h2>Questions de l'exercice : {{ exercice.titre }}</h2>
+
+        <form method="post" action="{{ path('exercice_submit', { 'id': exercice.id }) }}">
+            <ul class="question-list">
+                {% for question in questions %}
+                    <li class="question-item">
+                        <p class="question-text">{{ question.texte }}</p>
+
+                        <ul class="answers-list">
+                            {% for reponse in question.reponses %}
+                                <li class="answer-item">
+                                    <label>
+                                        <input type="radio" name="question_{{ question.id }}" value="{{ reponse.id }}">
+                                        {{ reponse.texte }}
+                                    </label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% else %}
+                    <p>Aucune question disponible pour cet exercice.</p>
+                {% endfor %}
+            </ul>
+
+            <button type="submit" class="btn-submit">Soumettre mes réponses</button>
+        </form>
+
+        {% if score is defined %}
+            <div class="score-result">
+                <h3>Votre score : {{ score }} / {{ totalQuestions }}</h3>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -13,7 +13,6 @@ use App\Entity\Reponse;
 use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-
 class AppFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
@@ -37,7 +36,7 @@ class AppFixtures extends Fixture
             );
             $utilisateur->setPassword($hashedPassword);          
             if ($i === 0) {
-            $utilisateur->setRoles(['ROLE_ADMIN']);
+                $utilisateur->setRoles(['ROLE_ADMIN']);
             } elseif ($i === 4) {
                 $utilisateur->setRoles(['ROLE_BANNED']);
             } else {
@@ -47,10 +46,17 @@ class AppFixtures extends Fixture
             $utilisateurs[] = $utilisateur;
         }
 
-        $matieres = [];
-        for ($i = 0; $i < 5; $i++) {
+        $matieres2 = [
+            'Mathématiques', 
+            'Physique', 
+            'Chimie', 
+            'Informatique', 
+            'Biologie'
+        ];
+
+        foreach ($matieres2 as $matiereName) {
             $matiere = new Matiere();
-            $matiere->setNom('Matière ' . ($i + 1));
+            $matiere->setNom($matiereName);
             $manager->persist($matiere);
             $matieres[] = $matiere;
         }
@@ -61,11 +67,12 @@ class AppFixtures extends Fixture
                 $chapitre = new Chapitre();
                 $chapitre->setNom('Chapitre ' . ($i + 1) . ' de ' . $matiere->getNom())
                     ->setDescription($faker->sentence)
-                    ->setMatiere($matiere);
+                    ->setMatiere($matiere);  // On assigne correctement l'objet Matiere
                 $manager->persist($chapitre);
                 $chapitres[] = $chapitre;
             }
         }
+        
 
         $exercices = [];
         foreach ($chapitres as $chapitre) {
@@ -96,7 +103,7 @@ class AppFixtures extends Fixture
             for ($i = 0; $i < 4; $i++) {
                 $reponse = new Reponse();
                 $reponse->setTexte($faker->sentence)
-                    ->setEstCorrecte($i === 0)
+                    ->setEstCorrecte($i === 0)  
                     ->setQuestion($question);
                 $manager->persist($reponse);
             }

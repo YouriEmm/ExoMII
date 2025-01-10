@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ matiere.nom }} - Chapitres{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ matiere.nom }} - Liste des Chapitres</h1>
+
+        <ul class="chapter-list">
+            {% for chapitre in chapitres %}
+                <li>
+                    <a href="{{ path('chapitre_exercices', { id: chapitre.id }) }}">
+                        {{ chapitre.nom }}
+                    </a>
+                </li>
+            {% else %}
+                <p>Aucun chapitre disponible pour cette matière.</p>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

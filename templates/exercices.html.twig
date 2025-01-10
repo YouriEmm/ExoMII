@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exercices - {{ chapitre.nom }}{% endblock %}
+
+{% block body %}
+    <h2>Exercices du chapitre {{ chapitre.nom }}</h2>
+
+    <ul>
+        {% for exercice in exercices %}
+            <li>
+                <a href="{{ path('exercice_questions', { 'id': exercice.id }) }}">
+                    {{ exercice.titre }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

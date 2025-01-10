@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site d'exercices</title>
+    <title>{% block title %}Bienvenue{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <div class="sidebar">
+        {% if app.user and 'ROLE_BANNED' in app.user.roles %}
+            <div class="alert alert-warning">
+                T BAN YA RIEN
+            </div>
+        {% else %}
             {% include 'sidebar.html.twig' %}
-        </div>
-        <div class="main-content">
-            {% block body %}{% endblock %}
-        </div>
+            <div class="main-content">
+                {% block body %}
+                {% endblock %}
+            </div>
+        {% endif %}
     </div>
 </body>
 </html>
