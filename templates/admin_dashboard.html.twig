@@ -5,7 +5,10 @@
 {% block body %}
 <div class="admin-dashboard">
     <h1>Tableau de bord - Administration</h1>
-
+    
+    <div class="create-matiere">
+        <a href="{{ path('app_matiere_new') }}" class="btn-create">➕ Ajouter une matière</a>
+    </div>
     <div class="dropdown-list">
         {% for matiere in matieres %}
             <div class="dropdown-item">
