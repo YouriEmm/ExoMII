@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ user.nom }}{% endblock %}
+
+{% block body %}
+    <div class="profile-container">
+        <h1>Profil de {{ user.nom }}</h1>
+
+        <div class="profile-info">
+            <p><strong>Nom:</strong> {{ user.nom }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+
+        <h2>Mes résultats</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Exercice</th>
+                    <th>Chapitre</th>
+                    <th>Matière</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resultat in resultats %}
+                    <tr>
+                        <td>{{ resultat.exercice.titre }}</td>
+                        <td>{{ resultat.exercice.chapitre.nom }}</td>
+                        <td>{{ resultat.exercice.chapitre.matiere.nom }}</td>
+                        <td>{{ resultat.score }} / {{ resultat.totalQuestions }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">Aucun résultat disponible.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {# <a href="{{ path('utilisateur_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier mes informations</a> #}
+    </div>
+{% endblock %}

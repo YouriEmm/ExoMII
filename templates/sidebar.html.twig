@@ -2,13 +2,6 @@
     <div class="sidebar-header">
         {% if app.user %}
             <p>Bienvenue, {{ app.user.nom }}</p>
-            <a  class="btn {% if 'ROLE_ADMIN' in app.user.roles %}btn-warning{% else %}btn-primary{% endif %}">
-                {% if 'ROLE_ADMIN' in app.user.roles %}
-                    Admin
-                {% else %}
-                    Profil
-                {% endif %}
-            </a>
         {% else %}
             <a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter</a>
         {% endif %}
@@ -27,6 +20,12 @@
     </div>
 
     {% if app.user %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_dashboard') }}" class="btn btn-info">Admin</a>
+            {% else %}
+                <a href="{{ path('profile_show') }}" class="btn btn-info">Profil</a>
+            {% endif %}
+
         <form method="POST" action="{{ path('app_logout') }}">
             <button type="submit" class="btn btn-danger">Déconnexion</button>
         </form>

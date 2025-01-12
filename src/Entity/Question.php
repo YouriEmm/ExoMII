@@ -24,7 +24,7 @@ class Question
     /**
      * @var Collection<int, Reponse>
      */
-    #[ORM\OneToMany(targetEntity: Reponse::class, mappedBy: 'question')]
+    #[ORM\OneToMany(targetEntity: Reponse::class, mappedBy: 'question', orphanRemoval: true)]
     private Collection $reponses;
 
     public function __construct()

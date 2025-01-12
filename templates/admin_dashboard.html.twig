@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord - Admin{% endblock %}
+
+{% block body %}
+<div class="admin-dashboard">
+    <h1>Tableau de bord - Administration</h1>
+
+    <div class="dropdown-list">
+        {% for matiere in matieres %}
+            <div class="dropdown-item">
+                <form method="post" action="{{ path('app_matiere_delete', { id: matiere.id }) }}" 
+                      onsubmit="return confirm('Supprime ou jte supprime {{matiere.nom}} ?');" 
+                      class="btn-delete-form">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ matiere.id) }}">
+                    <button type="submit" class="btn-delete">🗑️</button>
+                </form>
+                <input type="checkbox" id="matiere-{{ matiere.id }}" class="dropdown-checkbox">
+                <label for="matiere-{{ matiere.id }}" class="dropdown-label">{{ matiere.nom }}</label>
+                
+
+
+                <div class="dropdown-content">
+                    {% for chapitre in matiere.chapitres %}
+                        <div class="dropdown-item">
+                            <input type="checkbox" id="chapitre-{{ chapitre.id }}" class="dropdown-checkbox">
+                            <label for="chapitre-{{ chapitre.id }}" class="dropdown-label">{{ chapitre.nom }}</label>
+                            <div class="dropdown-content">
+                                {% for exercice in chapitre.exercices %}
+                                    <div class="dropdown-item">
+                                        <input type="checkbox" id="exercice-{{ exercice.id }}" class="dropdown-checkbox">
+                                        <label for="exercice-{{ exercice.id }}" class="dropdown-label">{{ exercice.titre }}</label>
+                                        <div class="dropdown-content">
+                                            {% for question in exercice.questions %}
+                                                <div class="dropdown-item">
+                                                    <span class="question">{{ question.texte }}</span>
+                                                    <ul class="reponses">
+                                                        {% for reponse in question.reponses %}
+                                                            <li class="{{ reponse.estCorrecte ? 'correct' : 'incorrect' }}">
+                                                                {{ reponse.texte }}
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <p>Aucune matière disponible.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

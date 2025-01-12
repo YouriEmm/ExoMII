@@ -16,6 +16,16 @@ class ResultatRepository extends ServiceEntityRepository
         parent::__construct($registry, Resultat::class);
     }
 
+    public function findByUser($user)
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('r.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Resultat[] Returns an array of Resultat objects
 //     */

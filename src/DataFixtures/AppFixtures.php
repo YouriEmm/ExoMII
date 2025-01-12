@@ -67,7 +67,7 @@ class AppFixtures extends Fixture
                 $chapitre = new Chapitre();
                 $chapitre->setNom('Chapitre ' . ($i + 1) . ' de ' . $matiere->getNom())
                     ->setDescription($faker->sentence)
-                    ->setMatiere($matiere);  // On assigne correctement l'objet Matiere
+                    ->setMatiere($matiere);
                 $manager->persist($chapitre);
                 $chapitres[] = $chapitre;
             }
@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
         foreach ($chapitres as $chapitre) {
             for ($i = 0; $i < 5; $i++) {
                 $exercice = new Exercice();
-                $exercice->setTitre('Exercice ' . ($i + 1) . ' de ' . $chapitre->getNom())
+                $exercice->setTitre('Exercice ' . ($i + 1))
                     ->setContenu($faker->paragraph)
                     ->setType($i % 2 === 0 ? 'ChoixSimple' : 'ChoixMultiple')
                     ->setNiveau($faker->randomElement(['Facile', 'Moyen', 'Difficile']))

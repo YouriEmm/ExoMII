@@ -34,13 +34,13 @@ class Exercice
     /**
      * @var Collection<int, Question>
      */
-    #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'exercice')]
+    #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'exercice', orphanRemoval: true)]
     private Collection $questions;
 
     /**
      * @var Collection<int, Resultat>
      */
-    #[ORM\OneToMany(targetEntity: Resultat::class, mappedBy: 'exercice')]
+    #[ORM\OneToMany(targetEntity: Resultat::class, mappedBy: 'exercice', orphanRemoval: true)]
     private Collection $resultats;
 
     public function __construct()

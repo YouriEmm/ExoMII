@@ -27,7 +27,7 @@ class Chapitre
     /**
      * @var Collection<int, Exercice>
      */
-    #[ORM\OneToMany(targetEntity: Exercice::class, mappedBy: 'chapitre')]
+    #[ORM\OneToMany(targetEntity: Exercice::class, mappedBy: 'chapitre', orphanRemoval: true)]
     private Collection $exercices;
 
     public function __construct()
