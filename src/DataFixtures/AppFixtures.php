@@ -26,25 +26,26 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
+        $utilisateursData = [
+            ['nom' => 'User1', 'email' => 'user1@exemple.com', 'role' => 'ROLE_ADMIN'],
+            ['nom' => 'User2', 'email' => 'user2@exemple.com', 'role' => 'ROLE_USER'],
+            ['nom' => 'User3', 'email' => 'user3@exemple.com', 'role' => 'ROLE_BANNED'],
+        ];
+        
         $utilisateurs = [];
-        for ($i = 0; $i < 5; $i++) {
+        foreach ($utilisateursData as $data) {
             $utilisateur = new Utilisateur();
-            $utilisateur->setNom($faker->lastName)->setEmail($faker->email);
-            $hashedPassword = $this->passwordHasher->hashPassword(
-                $utilisateur,
-                'password'
-            );
-            $utilisateur->setPassword($hashedPassword);          
-            if ($i === 0) {
-                $utilisateur->setRoles(['ROLE_ADMIN']);
-            } elseif ($i === 4) {
-                $utilisateur->setRoles(['ROLE_BANNED']);
-            } else {
-                $utilisateur->setRoles(['ROLE_USER']);
-            }
+            $utilisateur->setNom($data['nom'])
+                ->setEmail($data['email'])
+                ->setRoles([$data['role']]);
+        
+            $hashedPassword = $this->passwordHasher->hashPassword($utilisateur, 'donne20sur20stp');
+            $utilisateur->setPassword($hashedPassword);
+        
             $manager->persist($utilisateur);
             $utilisateurs[] = $utilisateur;
         }
+        
 
         $matieres2 = [
             'Mathématiques', 

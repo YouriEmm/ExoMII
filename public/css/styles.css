@@ -330,6 +330,7 @@ h1 {
 }
 
 .btn-create {
+    margin-bottom: 50px;
     background-color: #007bff;
     color: white;
     text-decoration: none;
