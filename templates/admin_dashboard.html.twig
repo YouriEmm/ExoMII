@@ -15,10 +15,9 @@
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ matiere.id) }}">
                     <button type="submit" class="btn-delete">🗑️</button>
                 </form>
+                <a href="{{ path('app_matiere_edit', { id: matiere.id }) }}" class="btn-edit">✏️ Modifier</a>
                 <input type="checkbox" id="matiere-{{ matiere.id }}" class="dropdown-checkbox">
                 <label for="matiere-{{ matiere.id }}" class="dropdown-label">{{ matiere.nom }}</label>
-                
-
 
                 <div class="dropdown-content">
                     {% for chapitre in matiere.chapitres %}

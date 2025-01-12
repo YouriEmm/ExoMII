@@ -92,14 +92,6 @@ final class MatiereController extends AbstractController{
         ]);
     }
 
-    #[Route(name: 'app_matiere_index', methods: ['GET'])]
-    public function index(MatiereRepository $matiereRepository): Response
-    {
-        return $this->render('matiere/index.html.twig', [
-            'matieres' => $matiereRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'app_matiere_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -111,7 +103,7 @@ final class MatiereController extends AbstractController{
             $entityManager->persist($matiere);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_matiere_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('matiere/new.html.twig', [
@@ -129,7 +121,7 @@ final class MatiereController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_matiere_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_dashboard', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('matiere/edit.html.twig', [
