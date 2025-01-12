@@ -6,7 +6,6 @@ Merci à Richard pour sa participation incroyable dans la création du style abs
 
 - **PHP 8.1 ou supérieur**
 - **Composer**
-- **Node.js** 
 - **Symfony CLI**
 - **Serveur SQL**
 
