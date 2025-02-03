@@ -39,14 +39,14 @@ class AppFixtures extends Fixture
                 ->setEmail($data['email'])
                 ->setRoles([$data['role']]);
         
-            $hashedPassword = $this->passwordHasher->hashPassword($utilisateur, 'donne20sur20stp');
+            $hashedPassword = $this->passwordHasher->hashPassword($utilisateur, '123');
             $utilisateur->setPassword($hashedPassword);
         
             $manager->persist($utilisateur);
             $utilisateurs[] = $utilisateur;
         }
         
-
+        
         $matieres2 = [
             'Mathématiques', 
             'Physique', 
