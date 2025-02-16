@@ -13,21 +13,49 @@
         {% for matiere in matieres %}
             <div class="dropdown-item">
                 <form method="post" action="{{ path('app_matiere_delete', { id: matiere.id }) }}" 
-                      onsubmit="return confirm('Supprime ou jte supprime {{matiere.nom}} ?');" 
+                      onsubmit="return confirm('Supprimer {{ matiere.nom }} ?');" 
                       class="btn-delete-form">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ matiere.id) }}">
                     <button type="submit" class="btn-delete">🗑️</button>
                 </form>
-                <a href="{{ path('app_matiere_edit', { id: matiere.id }) }}" class="btn-edit">✏️ Modifier</a>
+                <a href="{{ path('app_matiere_edit', { id: matiere.id }) }}" class="btn-edit">✏️ Modifier</a> <br>
+                <a href="{{ path('app_chapitre_new', {id: matiere.id}) }}">➕ Ajouter un chapitre</a>
+                
                 <input type="checkbox" id="matiere-{{ matiere.id }}" class="dropdown-checkbox">
                 <label for="matiere-{{ matiere.id }}" class="dropdown-label">{{ matiere.nom }}</label>
 
                 <div class="dropdown-content">
                     {% for chapitre in matiere.chapitres %}
+                        {% if chapitre.cours is not null %}
+                            <a href="{{ path('app_cours_edit', { id: chapitre.cours.id }) }}" class="btn-edit">✏️ Modifier le cours</a>
+                        {% else %}
+                            <a href="{{ path('app_cours_new', { chapitreId: chapitre.id }) }}" class="btn-create">➕ Ajouter un cours</a>
+                            <form method="POST" action="{{ path('app_cours_generate') }}">
+                                <input type="hidden" name="matiere" value="{{ matiere.nom }}">
+                                <input type="hidden" name="chapitre_nom" value="{{ chapitre.nom }}">
+                                <input type="hidden" name="chapitre_id" value="{{ chapitre.id }}">
+                                <button class="generate" type="submit">Générer un cours</button>
+                            </form>
+                        {% endif %}
                         <div class="dropdown-item">
+                            <form method="post" action="{{ path('app_chapitre_delete', { id: chapitre.id }) }}" 
+                                  onsubmit="return confirm('Supprimer {{ chapitre.nom }} ?');" 
+                                  class="btn-delete-form">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ chapitre.id) }}">
+                                <button type="submit" class="btn-delete">🗑️</button>
+                            </form>
+                            <a href="{{ path('app_chapitre_edit', { id: chapitre.id }) }}" class="btn-edit">✏️ Modifier</a>
                             <input type="checkbox" id="chapitre-{{ chapitre.id }}" class="dropdown-checkbox">
                             <label for="chapitre-{{ chapitre.id }}" class="dropdown-label">{{ chapitre.nom }}</label>
+
                             <div class="dropdown-content">
+                                <form method="POST" action="{{ path('app_exercice_generate') }}">
+                                    <input type="hidden" name="matiere" value="{{ matiere.nom }}">
+                                    <input type="hidden" name="chapitre_nom" value="{{ chapitre.nom }}">
+                                    <input type="hidden" name="chapitre_id" value="{{ chapitre.id }}">
+                                    <button class="generate" type="submit">Générer un exo</button>
+                                </form>
+                                
                                 {% for exercice in chapitre.exercices %}
                                     <div class="dropdown-item">
                                         <input type="checkbox" id="exercice-{{ exercice.id }}" class="dropdown-checkbox">

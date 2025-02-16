@@ -45,6 +45,10 @@ Merci à Richard pour sa participation incroyable dans la création du style abs
      ```bash
      symfony server:start
      ```
+
+7. **IA**
+   - Pour avoir accès au fonctionnalité de l'IA, créer une clé API de OPENIA et la mettre dans le .env à l'emplacement OPENAI_API_KEY=""
+
 ---
 
 ## Utilisateurs

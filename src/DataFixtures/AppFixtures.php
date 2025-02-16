@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\Utilisateur;
 use App\Entity\Matiere;
 use App\Entity\Chapitre;
+use App\Entity\Cours;
 use App\Entity\Exercice;
 use App\Entity\Question;
 use App\Entity\Reponse;
@@ -66,7 +67,7 @@ class AppFixtures extends Fixture
         foreach ($matieres as $matiere) {
             for ($i = 0; $i < 5; $i++) {
                 $chapitre = new Chapitre();
-                $chapitre->setNom('Chapitre ' . ($i + 1) . ' de ' . $matiere->getNom())
+                $chapitre->setNom('Chapitre ' . ($i + 1))
                     ->setDescription($faker->sentence)
                     ->setMatiere($matiere);
                 $manager->persist($chapitre);
@@ -88,6 +89,21 @@ class AppFixtures extends Fixture
                 $exercices[] = $exercice;
             }
         }
+
+        foreach ($chapitres as $chapitre) {
+            $cour = new Cours();
+            $cour->setNom('Cours sur le chapitre : ' . $chapitre->getNom())
+                ->setShortDescription("Petite description pour le cours sur le chapitre " . $chapitre->getNom())
+                ->setTexte(implode("\n\n", $faker->paragraphs(rand(2, 7))))
+                ->setDuree($faker->numberBetween(20, 120))
+                ->setNiveau($faker->randomElement(['Facile', 'Moyen', 'Difficile']))
+                ->setChapitre($chapitre);
+        
+            $chapitre->setCours($cour);
+            $manager->persist($cour);
+            $manager->persist($chapitre);
+        }
+        
 
         $questions = [];
         foreach ($exercices as $exercice) {

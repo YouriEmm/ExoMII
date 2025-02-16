@@ -30,6 +30,25 @@ class Chapitre
     #[ORM\OneToMany(targetEntity: Exercice::class, mappedBy: 'chapitre', orphanRemoval: true)]
     private Collection $exercices;
 
+    #[ORM\OneToOne(mappedBy: 'chapitre', cascade: ['persist', 'remove'])]
+    private ?Cours $cours = null;
+
+    public function getCours(): ?Cours
+    {
+        return $this->cours;
+    }
+
+    public function setCours(?Cours $cours): static
+    {
+        if ($cours !== null && $cours->getChapitre() !== $this) {
+            $cours->setChapitre($this);
+        }
+
+        $this->cours = $cours;
+        return $this;
+    }
+
+
     public function __construct()
     {
         $this->exercices = new ArrayCollection();

@@ -9,7 +9,7 @@
         <ul class="chapter-list">
             {% for chapitre in chapitres %}
                 <li>
-                    <a href="{{ path('chapitre_exercices', { id: chapitre.id }) }}">
+                    <a href="{{ path('app_chapitre_index', { id: chapitre.id }) }}">
                         {{ chapitre.nom }}
                     </a>
                 </li>

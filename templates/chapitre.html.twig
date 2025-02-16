@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chapitre : {{ chapitre.nom }}{% endblock %}
+
+{% block body %}
+        
+<a href="{{ path('app_cours_show', {id: chapitre.id })}}" class="btn btn-primary">Lire le cours</a>
+<br>
+<a href="{{ path('chapitre_exercices', { id: chapitre.id }) }}" class="btn btn-secondary">Liste des exercices</a>
+
+    
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Cours {% endblock %}
+
+{% block body %}
+    {% if cour is not null %}
+        {% if cour.texte is not empty %}
+            <h1 class="course-title">{{ cour.nom }}</h1>
+
+            <p class="course-short-description">{{ cour.shortDescription }}</p>
+
+            <div class="course-info">
+                <p><strong>Difficulté :</strong> {{ cour.niveau | default('Non précisée') }}</p>
+                <p><strong>Durée :</strong> 
+                    {% if cour.duree is not empty %}
+                        {{ cour.duree }} minutes
+                    {% else %}
+                        Non précisée
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="course-content">
+                {{ cour.texte }}
+            </div>
+        {% else %}
+            <h1>Pas de cours ou cours pas dispo</h1>
+        {% endif %}
+    {% else %}
+        <h1>Pas de cours disponible</h1>
+    {% endif %}
+{% endblock %}

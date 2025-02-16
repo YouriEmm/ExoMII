@@ -344,3 +344,119 @@ h1 {
 .btn-create:hover {
     background-color: #0056b3;
 }
+
+
+.generate{
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.chapter-list {
+    background: gray;
+
+}
+
+.chapter-list li {
+    list-style: none;
+    padding: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.chapter-list li:last-child {
+    border-bottom: none;
+}
+
+.chapter-list li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    display: block;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.course-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.course-short-description {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #666;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.course-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: justify;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.course-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.course-short-description {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.course-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.course-info p {
+    font-size: 1rem;
+    color: #444;
+    margin: 5px 0;
+}
+
+.course-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+}
